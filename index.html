@@ -7,29 +7,99 @@
     <link rel="stylesheet" href="style.css">
 
     <script>
+        let indeksy = [];
+        for (let i = 1; i <= 10; i++) {
+            indeksy.push(i, i);
+        }
+
+        indeksy.sort(() => Math.random() - 0.5);
+    
+        function losuj() {
+            if (indeksy.length === 0) {
+
+                for (let i = 1; i <= 10; i++) {
+                    indeksy.push(i, i);
+                }
+
+                indeksy.sort(() => Math.random() - 0.5);
+
+            }
+
+            
+            const wynik = indeksy.shift(); 
+            return wynik;
+        }
+
+        function powtorzenie(tab){
+            if(tab[0][0].children[0].getAttribute("src") == tab[1][0].children[0].getAttribute("src")){
+                return true;
+            }else{
+                return false;
+            }
+        }
+
         $(document).ready(function () {
+            let liczba_zluch_wyborow=0;
+
             let kafelek;
             let img;
-            let indeks;
+            let table=[];
+            
             $("button").on("click",function(){
-                for(let i = 1;i<=10;i++){
+                $("span").text("Licznik")
+                liczba_zluch_wyborow = 0;
+                $("div.kafelek").remove();
 
-                    //generowanie kafelków
-                    indeks=Math.floor(Math.random() * 10) + 1;
+                for(let i = 1;i<=20;i++){
+                    let liczba = losuj();
+
                     kafelek=document.createElement("div");
                     img=document.createElement("img");
 
-                    kafelek.setAttribute("id",`element${indeks}`);
+                    kafelek.setAttribute("id",`element${liczba}`);
                     kafelek.classList.add("kafelek")
-                    img.setAttribute("src",`images/element${indeks}.png`);
+                    img.setAttribute("src",`images/element${liczba}.png`);
                     kafelek.appendChild(img);
 
                     $("div#kafelki").append(kafelek)
+                    console.log(kafelek)
 
                 }
+                
                 $("div.kafelek").on("click",function(){
-                    console.log($(this).children()[0])
-                    $(this).children()[0].style.opacity="1"
+                    
+                    if(table.length < 2){
+
+                        table.push($(this))
+                        $(this).children()[0].style.opacity="1";
+                        
+                    }else{
+
+                        $("div.kafelek img").css("opacity","0");
+                        table.splice(0,table.length);
+                        table.push($(this))
+                        $(this).children()[0].style.opacity="1";
+                        
+                    }
+                    
+
+                    if(powtorzenie(table)){
+                        table.forEach(item=>{
+                            //item.css("display","none")
+                            item.css("background-color","white")
+                            console.log(item[0].children[0].remove())
+                            item.addClass("zaznaczone")
+
+                            if($(".zaznaczone").length == 20){
+                                $("div.kafelek").remove();
+                                $("span").text("Licznik:")
+                                liczba_zluch_wyborow = 0;
+                            }
+                        })
+                    }else{
+                        liczba_zluch_wyborow++;
+                        $("span").text(`Licznik:${liczba_zluch_wyborow}`)
+                    }
                 })
             })
         });

@@ -1,12 +1,61 @@
-div#kafelki div{
-    width: 150px;
-    height: 150px;
-    background-color: orange;
+
+body {
+    background-color: #f0f4f8;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    min-height: 100vh;
+    margin: 0;
+    padding: 20px;
+}
+
+#conatiner {
+    text-align: center;
+}
+
+span {
+    display: block;
+    font-size: 20px;
+    margin-bottom: 15px;
+}
+
+#kafelki {
+    display: grid;
+    grid-template-columns: repeat(5, 100px);
+    grid-gap: 15px;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+.kafelek {
+    width: 100px;
+    height: 100px;
+    background-color: #007bff;
+    border-radius: 10px;
     display: flex;
     justify-content: center;
     align-items: center;
+    cursor: pointer;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.2);
 }
 
-div#kafelki div img{
-    opacity: 0;
+.kafelek img {
+    width: 80%;
+    height: 80%;
+    opacity: 0; 
+    transition: opacity 0.3s;
+}
+
+button {
+    padding: 10px 25px;
+    font-size: 16px;
+    background-color: #28a745;
+    color: white;
+    border: none;
+    border-radius: 8px;
+}
+
+.kafelek.zaznaczone {
+    background-color: #ffc107 !important;
+    cursor: default;
 }
