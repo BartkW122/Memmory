@@ -1,0 +1,12 @@
+div#kafelki div{
+    width: 150px;
+    height: 150px;
+    background-color: orange;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+div#kafelki div img{
+    opacity: 0;
+}

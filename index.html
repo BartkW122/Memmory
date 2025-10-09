@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script type="text/javascript" src="jquery-3.3.1.min.js"></script>
+    <link rel="stylesheet" href="style.css">
+
+    <script>
+        $(document).ready(function () {
+            let kafelek;
+            let img;
+            let indeks;
+            $("button").on("click",function(){
+                for(let i = 1;i<=10;i++){
+
+                    //generowanie kafelków
+                    indeks=Math.floor(Math.random() * 10) + 1;
+                    kafelek=document.createElement("div");
+                    img=document.createElement("img");
+
+                    kafelek.setAttribute("id",`element${indeks}`);
+                    kafelek.classList.add("kafelek")
+                    img.setAttribute("src",`images/element${indeks}.png`);
+                    kafelek.appendChild(img);
+
+                    $("div#kafelki").append(kafelek)
+
+                }
+                $("div.kafelek").on("click",function(){
+                    console.log($(this).children()[0])
+                    $(this).children()[0].style.opacity="1"
+                })
+            })
+        });
+    </script>
+
+    <title>Memmory</title>
+</head>
+<body>
+    <div id="conatiner">
+        <span>Licznik</span>
+        <div id="kafelki">
+            <!--kafelki-->
+        </div>
+        <button>Rozpocznij gre</button>
+    </div>
+</body>
+</html>
